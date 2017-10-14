@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Hello Facebook</title>
+    </head>
+    <body>
+        <h3>Connect to Facebook</h3>
+
+        <form id="fbForm" action="/connect/facebook" method="POST">
+            <input type="hidden" name="scope" value="email,public_profile,user_about_me,user_birthday,user_education_history,user_hometown,user_likes,user_location,user_posts,user_tagged_places,user_work_history" />
+            <div class="formInfo">
+                <p>Redirecting you to Facebook...</p>
+            </div>
+        </form>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("#fbForm").submit();
+        });
+    </script>
+</html>
