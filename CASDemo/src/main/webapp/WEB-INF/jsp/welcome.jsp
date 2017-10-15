@@ -24,7 +24,7 @@
                 <a class="btn btn-block btn-social btn-facebook" onclick="openFBpopup()">
                     <span class="fa fa-facebook"></span> Sign in with Facebook
                 </a>
-                <a class="btn btn-block btn-social btn-linkedin">
+                <a class="btn btn-block btn-social btn-linkedin" onclick="openLinkedInpopup()">
                     <span class="fa fa-linkedin"></span> Sign in with LinkedIn
                 </a>
             </div>
@@ -32,12 +32,16 @@
         <script src="/js/jquery.js"></script>
         <script>
             var fbPopup;
+            var linkedInPopup;
             var appId="APP"+(new Date).getTime();
             var name=appId+"_Random_Name";
             var email=appId+"RandomName@gmail.com";
             var mobile="9"+Math.round(Math.random()*1000000000);
             function openFBpopup() {
-                fbPopup=window.open('http://localhost:8080/?applicationNumber='+appId+'&name='+name+"&email="+email+"&mobile="+mobile, 'Facebook', 'menubar=no,location=no,toolbar=no,scrollbars=yes,resizable=no,top=200,left=200,width=800,height=400');
+                fbPopup=window.open('http://localhost:8080/access/facebook?applicationNumber='+appId+'&name='+name+"&email="+email+"&mobile="+mobile, 'Facebook', 'menubar=no,location=no,toolbar=no,scrollbars=yes,resizable=no,top=200,left=200,width=800,height=400');
+            }
+            function openLinkedInpopup() {
+                linkedInPopup=window.open('http://localhost:8080/access/linkedIn?applicationNumber='+appId+'&name='+name+"&email="+email+"&mobile="+mobile, 'Facebook', 'menubar=no,location=no,toolbar=no,scrollbars=yes,resizable=no,top=200,left=200,width=800,height=400');
             }
         </script>
     </body>
