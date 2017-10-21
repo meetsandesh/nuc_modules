@@ -38,10 +38,10 @@
             var email=appId+"RandomName@gmail.com";
             var mobile="9"+Math.round(Math.random()*1000000000);
             function openFBpopup() {
-                fbPopup=window.open('http://localhost:8080/access/facebook?applicationNumber='+appId+'&name='+name+"&email="+email+"&mobile="+mobile, 'Facebook', 'menubar=no,location=no,toolbar=no,scrollbars=yes,resizable=no,top=200,left=200,width=800,height=400');
+                fbPopup=window.open('http://localhost:8080/access/facebook?userId='+appId+'&name='+name+"&email="+email+"&mobile="+mobile, 'Facebook', 'menubar=no,location=no,toolbar=no,scrollbars=yes,resizable=no,top=200,left=200,width=800,height=400');
             }
             function openLinkedInpopup() {
-                linkedInPopup=window.open('http://localhost:8080/access/linkedIn?applicationNumber='+appId+'&name='+name+"&email="+email+"&mobile="+mobile, 'Facebook', 'menubar=no,location=no,toolbar=no,scrollbars=yes,resizable=no,top=200,left=200,width=800,height=400');
+                linkedInPopup=window.open('http://localhost:8080/access/linkedIn?userId='+appId+'&name='+name+"&email="+email+"&mobile="+mobile, 'Facebook', 'menubar=no,location=no,toolbar=no,scrollbars=yes,resizable=no,top=200,left=200,width=800,height=400');
             }
         </script>
     </body>
