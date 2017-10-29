@@ -1,7 +1,6 @@
 package com.nucleus.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nucleus.entity.social.media.FacebookConnection;
 import com.nucleus.entity.social.media.LinkedInConnection;
 import com.nucleus.entity.social.media.NucUser;
 import com.nucleus.repositories.NucUserRepository;

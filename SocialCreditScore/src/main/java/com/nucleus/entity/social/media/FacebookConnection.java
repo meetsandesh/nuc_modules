@@ -16,6 +16,8 @@ import lombok.ToString;
 @Setter 
 @ToString
 public class FacebookConnection extends BaseEntity{
+
+    private static final long serialVersionUID = 1L;
     
     @OneToOne(mappedBy = "nucFacebookData")
     private NucUser nucUser;
