@@ -12,5 +12,4 @@ public class ParameterCategory extends BaseMasterEntity{
     private static final long serialVersionUID = 1L;
     private SocialMediaType socialMediaType;
     private double categoryWeight;
-    
 }

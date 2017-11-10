@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Social Credit Score</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">SocialCreditScore</a>
+                </div>
+                <div class="nav navbar-nav pull-right">
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Profile</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/logout">Sign Out</a></li>
+                        </ul>
+                    </li>
+                </div>
+                <ul class="nav navbar-nav menu">
+                    <li class=""><a href="#" data-page="home" onClick="startChain('/home');">Home</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Configuration <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-page="facebookConfig" onClick="startChain('/config/facebook');">Facebook</a></li>
+                            <li><a href="#" data-page="linkedInConfig" onClick="startChain('/config/linkedIn');">LinkedIn</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Masters <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-page="viewAllParameterCategory" onClick="startChain('/parameterCategory/viewAll');">Parameter Category</a></li>
+                            <li><a href="#" data-page="viewAllParameterSubCategory" onClick="startChain('/parameterSubCategory/viewAll');">Parameter Sub-Category</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+
+        </div>
+        
+        <script>
+            $(document).ready(function(){
+                $(".menu>li").on("click",function(){
+                    $(".menu>li.active").removeClass("active");
+                    $(this).addClass("active");
+                });
+                bindTriggers();
+            });
+            function bindTriggers(){
+                $('body').on("fetchPage",function(event,json){
+                    $.get(json.url).done(function(data){
+                        console.log(data);
+                        $(".container").html(data);
+                    });
+                });
+            }
+            function startChain(loc){
+                $('body').trigger("fetchPage",{url:loc});
+            }
+        </script>
+        
+    </body>
+</html>
+
