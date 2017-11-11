@@ -1,7 +1,6 @@
 package com.nucleus.entity.score.parameters;
 
 import com.nucleus.entity.BaseMasterEntity;
-import com.nucleus.others.SocialMediaType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -10,6 +9,6 @@ import javax.persistence.Table;
 public class ParameterCategory extends BaseMasterEntity{
     
     private static final long serialVersionUID = 1L;
-    private SocialMediaType socialMediaType;
+    private String socialMediaType;
     private double categoryWeight;
 }

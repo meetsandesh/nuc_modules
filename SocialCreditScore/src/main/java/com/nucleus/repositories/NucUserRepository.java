@@ -5,6 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface NucUserRepository extends CrudRepository<NucUser, Long> {
 
-    NucUser findByNucUserEmail(String nucUserEmail); 
+    NucUser findByNucUserName(String nucUserName); 
+    
+    NucUser findByNucUserId(String nucUserId); 
     
 }

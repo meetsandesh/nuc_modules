@@ -35,13 +35,16 @@
             var linkedInPopup;
             var appId="APP"+(new Date).getTime();
             var name=appId+"_Random_Name";
-            var email=appId+"RandomName@gmail.com";
-            var mobile="9"+Math.round(Math.random()*1000000000);
+            var email1="sandesh3008@gmail.com";
+            var email2=appId+"RandomName2@gmail.com";
+            var mobile1="9"+Math.round(Math.random()*1000000000);
+            var mobile2="9"+Math.round(Math.random()*1000000000);
+            var calulateScore=true;
             function openFBpopup() {
-                fbPopup=window.open('http://localhost:8080/access/facebook?userId='+appId+'&name='+name+"&email="+email+"&mobile="+mobile, 'Facebook', 'menubar=no,location=no,toolbar=no,scrollbars=yes,resizable=no,top=200,left=200,width=800,height=400');
+                fbPopup=window.open('http://localhost:8080/access/facebook?userId='+appId+'&name='+name+"&email="+email1+"&email="+email2+"&mobile="+mobile1+"&mobile="+mobile2+"&calulateScore="+calulateScore, 'Facebook', 'menubar=no,location=no,toolbar=no,scrollbars=yes,resizable=no,top=200,left=200,width=800,height=400');
             }
             function openLinkedInpopup() {
-                linkedInPopup=window.open('http://localhost:8080/access/linkedIn?userId='+appId+'&name='+name+"&email="+email+"&mobile="+mobile, 'Facebook', 'menubar=no,location=no,toolbar=no,scrollbars=yes,resizable=no,top=200,left=200,width=800,height=400');
+                linkedInPopup=window.open('http://localhost:8080/access/linkedIn?userId='+appId+'&name='+name+"&email="+email1+"&email="+email2+"&mobile="+mobile1+"&mobile="+mobile2+"&calulateScore="+calulateScore, 'Facebook', 'menubar=no,location=no,toolbar=no,scrollbars=yes,resizable=no,top=200,left=200,width=800,height=400');
             }
         </script>
     </body>

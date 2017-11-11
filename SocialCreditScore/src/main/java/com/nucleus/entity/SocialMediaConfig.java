@@ -1,7 +1,6 @@
 package com.nucleus.entity;
 
 import com.nucleus.entity.score.parameters.ParameterCategory;
-import com.nucleus.others.SocialMediaType;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -18,7 +17,7 @@ import lombok.ToString;
 public class SocialMediaConfig extends BaseMasterEntity{
     
     private static final long serialVersionUID = 1L;
-    private SocialMediaType socialMediaType;
+    private String socialMediaType;
     private String clientID;
     private String clientKey;
     @OneToMany

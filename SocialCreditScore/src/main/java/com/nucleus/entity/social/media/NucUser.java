@@ -1,6 +1,9 @@
 package com.nucleus.entity.social.media;
 
 import com.nucleus.entity.BaseEntity;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -22,8 +25,12 @@ public class NucUser extends BaseEntity{
     private static final long serialVersionUID = 1L;
     private String nucUserId;
     private String nucUserName;
-    private String nucUserMobile;
-    private String nucUserEmail;
+    @Column
+    @ElementCollection(targetClass=String.class)
+    private List<String> nucUserMobile;
+    @Column
+    @ElementCollection(targetClass=String.class)
+    private List<String> nucUserEmail;
     @OneToOne(cascade = {javax.persistence.CascadeType.ALL})
     @JoinColumn(name = "nuc_facebook_data_id")
     private FacebookConnection nucFacebookData;

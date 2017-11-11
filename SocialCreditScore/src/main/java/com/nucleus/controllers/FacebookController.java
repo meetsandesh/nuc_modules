@@ -3,7 +3,11 @@ package com.nucleus.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nucleus.entity.social.media.FacebookConnection;
 import com.nucleus.entity.social.media.NucUser;
-import com.nucleus.repositories.NucUserRepository;
+import com.nucleus.service.NucUserService;
+import com.nucleus.service.social.credit.score.FacebookCreditScoreImpl;
+import com.nucleus.service.social.credit.score.SocialCreditScore;
+import com.nucleus.vo.NucUserVO;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.ConnectionRepository;
@@ -18,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class FacebookController {
     
     @Autowired
-    private NucUserRepository nucUserRepository;
+    private NucUserService nucUserService;
+    @Autowired
+    private FacebookCreditScoreImpl socialCreditScore;
     private final Facebook facebook;
     private final ConnectionRepository connectionRepository;
 
@@ -29,23 +35,24 @@ public class FacebookController {
 
     @RequestMapping("/access/facebook")
     public String connectToFacebookNUC(Model model, @RequestParam("userId") String userId,
-            @RequestParam("name") String name, @RequestParam("email") String email,
-            @RequestParam("mobile") String mobile, HttpSession session) {
+            @RequestParam("name") String name, @RequestParam("email") List<String> email,
+            @RequestParam("mobile") List<String> mobile,@RequestParam("calulateScore") boolean calulateScore, HttpSession session) {
+        NucUserVO nucUserVO=new NucUserVO();
+        nucUserVO.setNucUserId(userId);
+        nucUserVO.setNucUserName(name);
+        nucUserVO.setNucUserMobile(mobile);
+        nucUserVO.setNucUserEmail(email);
         //check if user is indeed from cas???
         
         //if no throw error
         
         //if yes
-        NucUser nucUser=nucUserRepository.findByNucUserEmail(email);
+        NucUser nucUser=nucUserService.findNucUserByEmail(email);
         if(nucUser==null){
-            nucUser=new NucUser();
-            nucUser.setNucUserEmail(email);
-            nucUser.setNucUserId(userId);
-            nucUser.setNucUserMobile(mobile);
-            nucUser.setNucUserName(name);
-            nucUserRepository.save(nucUser);
+            nucUserService.saveNucUser(nucUserVO);
         }
-        session.setAttribute("UserEmail", email);
+        session.setAttribute("UserId", userId);
+        session.setAttribute("calulateScore", calulateScore);
         if (connectionRepository.findPrimaryConnection(Facebook.class) == null) {
             return "redirect:/connect/facebook";
         }
@@ -63,11 +70,21 @@ public class FacebookController {
         String json = mapper.writeValueAsString(user);
         FacebookConnection facebookConnection=new FacebookConnection();
         facebookConnection.setNucUserFacebookData(json);
-        String email=session.getAttribute("UserEmail").toString();
-        NucUser nucUser=nucUserRepository.findByNucUserEmail(email);
-        nucUser.setNucFacebookData(facebookConnection);
-        nucUserRepository.save(nucUser);
-        return "facebook_last_page";
+        String email=user.getEmail();
+        NucUser nucUser=nucUserService.findNucUserByEmail(email);
+        if(nucUser!=null){
+            nucUser.setNucFacebookData(facebookConnection);
+            nucUserService.saveNucUser(nucUser);
+            //Calculate Score
+            boolean calulateScore=(boolean) session.getAttribute("calulateScore");
+            if(calulateScore){
+                socialCreditScore.calculateSocialCreditScore(email);
+            }
+            return "facebook_last_page";
+        }
+        else{
+            return "facebook_error_page";
+        }
     }
 
 }

@@ -24,5 +24,6 @@ public class FacebookConnection extends BaseEntity{
     @Lob
     @Column( length = 100000 )
     private String nucUserFacebookData;
+    private int facebookCreditScore;
     
 }
